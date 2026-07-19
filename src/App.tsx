@@ -2,6 +2,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Hero from "./components/sections/Hero";
 import Services from "./components/sections/Services";
+import Realisations from "./components/sections/Realisations";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <main className="flex-1">
         <Hero />
         <Services />
+        <Realisations />
       </main>
       <Footer />
     </div>
