@@ -1,6 +1,6 @@
 services:
   site:
-    image: ghcr.io/andgelbrissaud/poussieredantan:latest
+    image: ghcr.io/andgelbrissaud/poussieredantan:${VERSION}
     container_name: poussieredantan
     ports:
       - "80:80"
