@@ -1,75 +1,269 @@
-# React + TypeScript + Vite
+# Poussière d'Antan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![CI](https://github.com/AndgelBrissaud/poussieredantan/actions/workflows/ci.yml/badge.svg)
 
-Currently, two official plugins are available:
+Site officiel de **Poussière d'Antan**, atelier spécialisé dans la rénovation de meubles anciens par aérogommage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Présentation
 
-## React Compiler
+Ce projet contient le code source du site web de Poussière d'Antan.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+L'objectif est de créer une vitrine numérique moderne permettant de présenter :
 
-## Expanding the ESLint configuration
+- le savoir-faire artisanal de l'atelier ;
+- les techniques de rénovation utilisées ;
+- les réalisations avant/après ;
+- les prestations proposées ;
+- les informations de contact.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Le site est conçu pour être performant, responsive et optimisé pour le référencement local.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Stack technique
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Frontend
 
-```
+- React
+- TypeScript
+- Vite
+- ESLint
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Conteneurisation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Docker
+- Docker Compose
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### CI/CD
+
+- GitHub Actions
+- GitHub Container Registry (GHCR)
+
+---
+
+## Architecture du projet
 
 ```
+poussieredantan/
+│
+├── public/                 # Ressources statiques
+│
+├── src/                    # Code source React
+│   ├── assets/             # Images et ressources
+│   ├── components/         # Composants réutilisables
+│   ├── App.tsx             # Composant principal
+│   └── main.tsx            # Point d'entrée React
+│
+├── .github/
+│   └── workflows/          # Workflows GitHub Actions
+│
+├── Dockerfile              # Image Docker de développement
+├── docker-compose.yml      # Configuration Docker Compose
+├── package.json            # Dépendances et scripts npm
+└── README.md
+```
+
+---
+
+## Installation locale
+
+### Prérequis
+
+- Node.js 22+
+- npm
+- Docker Desktop
+
+---
+
+## Développement avec npm
+
+Installer les dépendances :
+
+```bash
+npm install
+```
+
+Lancer le serveur de développement :
+
+```bash
+npm run dev
+```
+
+L'application sera disponible sur :
+
+```
+http://localhost:5173
+```
+
+---
+
+## Développement avec Docker
+
+Construire et lancer le conteneur :
+
+```bash
+docker compose up --build
+```
+
+L'application sera accessible sur :
+
+```
+http://localhost:5173
+```
+
+Les modifications du code source sont automatiquement prises en compte grâce au Hot Module Replacement (HMR).
+
+Pour arrêter les conteneurs :
+
+```bash
+docker compose down
+```
+
+---
+
+## Scripts disponibles
+
+### Développement
+
+```bash
+npm run dev
+```
+
+Lance le serveur de développement Vite.
+
+### Vérification du code
+
+```bash
+npm run lint
+```
+
+Analyse le code avec ESLint.
+
+### Build production
+
+```bash
+npm run build
+```
+
+Compile l'application pour un environnement de production.
+
+---
+
+## Intégration continue
+
+Chaque modification envoyée sur la branche principale déclenche automatiquement un workflow GitHub Actions.
+
+Le pipeline vérifie :
+
+1. Installation des dépendances
+2. Analyse du code avec ESLint
+3. Compilation de l'application
+
+Workflow :
+
+```
+Git Push
+   |
+   v
+GitHub Actions
+   |
+   +-- npm install
+   |
+   +-- npm run lint
+   |
+   +-- npm run build
+   |
+   v
+Validation réussie
+```
+
+---
+
+## Gestion des versions
+
+Le projet utilise le versionnement sémantique :
+
+```
+MAJEUR.MINEUR.CORRECTIF
+```
+
+Exemples :
+
+```
+v1.0.0
+v1.1.0
+v1.1.1
+```
+
+Les versions stables seront publiées via des tags Git.
+
+Exemple :
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+---
+
+## Déploiement prévu
+
+L'objectif est d'avoir une chaîne de déploiement automatisée :
+
+```
+Développement local
+        |
+        v
+Git Commit
+        |
+        v
+Git Push
+        |
+        v
+GitHub Actions
+        |
+        v
+Build Docker
+        |
+        v
+GitHub Container Registry
+        |
+        v
+Serveur de production
+        |
+        v
+Site en ligne
+```
+
+---
+
+## Roadmap
+
+### Infrastructure
+
+- [x] Initialisation du projet React
+- [x] Configuration TypeScript
+- [x] Configuration ESLint
+- [x] Environnement Docker de développement
+- [x] GitHub Actions CI
+- [ ] Image Docker de production
+- [ ] Publication automatique GHCR
+- [ ] Déploiement automatique
+
+### Site
+
+- [ ] Page d'accueil
+- [ ] Présentation de l'atelier
+- [ ] Explication de l'aérogommage
+- [ ] Galerie avant/après
+- [ ] Présentation des réalisations
+- [ ] Formulaire de contact
+- [ ] Optimisation SEO
+
+---
+
+## Licence
+
+Projet privé développé pour Poussière d'Antan.
+
+Tous droits réservés.
