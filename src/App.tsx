@@ -1,12 +1,35 @@
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import Hero from "./components/sections/Hero";
+
+
 function App() {
+
   return (
-    <main>
-      <h1>Poussière d'Antan</h1>
-      <p>
-        Rénovation de meubles anciens par aérogommage.
-      </p>
-    </main>
-  )
+
+    <div className="
+      min-h-screen
+      flex
+      flex-col
+    ">
+
+      <Header />
+
+
+      <main className="flex-1">
+
+        <Hero />
+
+      </main>
+
+
+      <Footer />
+
+
+    </div>
+
+  );
 }
 
-export default App
+
+export default App;

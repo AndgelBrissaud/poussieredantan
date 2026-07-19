@@ -1,10 +1,118 @@
-:root {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+
+@theme {
+
+  --color-antique-50: #F8F5EF;
+  --color-antique-100: #EFE6D6;
+  --color-antique-200: #E1CFB0;
+  --color-antique-300: #C9A77B;
+  --color-antique-400: #B07A4B;
+  --color-antique-500: #8B5E34;
+  --color-antique-600: #6B4528;
+  --color-antique-700: #4B3020;
+  --color-antique-800: #332015;
+  --color-antique-900: #21140D;
+
+  --color-nature: #66755A;
+  --color-nature-light: #8A9678;
+  --color-nature-dark: #46513D;
+
+
+  --font-display:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  --font-body:
+    Inter,
+    Arial,
+    sans-serif;
+
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
+@layer base {
+
+  body {
+    @apply bg-antique-50 text-antique-800;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+}
+
+
+@layer components {
+
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-8;
+  }
+
+
+  .title-hero {
+    @apply 
+      font-display
+      text-5xl
+      md:text-7xl
+      leading-tight
+      text-antique-900;
+  }
+
+
+  .title-section {
+    @apply
+      font-display
+      text-4xl
+      md:text-5xl
+      text-antique-800;
+  }
+
+
+  .text-content {
+    @apply
+      font-body
+      text-base
+      leading-relaxed
+      text-antique-700;
+  }
+
+
+  .button-primary {
+
+    @apply
+      inline-flex
+      items-center
+      justify-center
+      rounded-full
+      bg-antique-700
+      px-8
+      py-3
+      text-white
+      transition
+      hover:bg-antique-800;
+
+  }
+
+
+  .button-secondary {
+
+    @apply
+      inline-flex
+      items-center
+      justify-center
+      rounded-full
+      border
+      border-antique-600
+      px-8
+      py-3
+      text-antique-700
+      transition
+      hover:bg-antique-100;
+
+  }
+
 }
