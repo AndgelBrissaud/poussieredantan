@@ -5,6 +5,7 @@ import Services from "./components/sections/Services";
 import Realisations from "./components/sections/Realisations";
 import About from "./components/sections/About";
 import Contact from "./components/sections/Contact";
+import ParallaxSection from "./components/sections/ParallaxSection";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Hero />
         <About />
         <Services />
+        <ParallaxSection />
         <Realisations />
         <Contact />
       </main>

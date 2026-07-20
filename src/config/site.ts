@@ -15,4 +15,8 @@ export const siteConfig = {
     "Rénovation de meubles anciens",
     "Restauration du bois",
   ],
+
+  domain: "https://poussieredantan.com",
+
+  email: "contact@poussieredantan.com",
 };

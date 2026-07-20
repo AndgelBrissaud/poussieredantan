@@ -1,6 +1,17 @@
 @import "tailwindcss";
 
+
+/*
+|--------------------------------------------------------------------------
+| Design Tokens
+|--------------------------------------------------------------------------
+*/
+
 @theme {
+
+  /*
+  | Colors
+  */
 
   --color-antique-50: #F8F5EF;
   --color-antique-100: #EFE6D6;
@@ -13,10 +24,19 @@
   --color-antique-800: #332015;
   --color-antique-900: #21140D;
 
+
+  /*
+  | Nature colors
+  */
+
   --color-nature: #66755A;
   --color-nature-light: #8A9678;
   --color-nature-dark: #46513D;
 
+
+  /*
+  | Fonts
+  */
 
   --font-display:
     "Cormorant Garamond",
@@ -30,6 +50,13 @@
 
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+
 @layer base {
 
   body {
@@ -37,48 +64,99 @@
     font-family: var(--font-body);
   }
 
+
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
   }
 
+
+  p {
+    @apply leading-relaxed;
+  }
+
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| Components
+|--------------------------------------------------------------------------
+*/
+
 @layer components {
 
+
+  /*
+  |--------------------------------------------------------------------------
+  | Layout
+  |--------------------------------------------------------------------------
+  */
+
+
   .container-site {
-    @apply mx-auto w-full max-w-7xl px-6 lg:px-8;
+
+    @apply
+      mx-auto
+      w-full
+      max-w-7xl
+      px-6
+      lg:px-8;
+
   }
+
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Typography
+  |--------------------------------------------------------------------------
+  */
 
 
   .title-hero {
-    @apply 
+
+    @apply
       font-display
       text-5xl
-      md:text-7xl
       leading-tight
-      text-antique-900;
+      text-antique-900
+      md:text-7xl;
+
   }
+
 
 
   .title-section {
+
     @apply
       font-display
       text-4xl
-      md:text-5xl
-      text-antique-800;
+      text-antique-800
+      md:text-5xl;
+
   }
 
 
+
   .text-content {
+
     @apply
       font-body
       text-base
       leading-relaxed
       text-antique-700;
+
   }
+
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Buttons
+  |--------------------------------------------------------------------------
+  */
 
 
   .button-primary {
@@ -91,11 +169,15 @@
       bg-antique-700
       px-8
       py-3
+      font-medium
       text-white
       transition
-      hover:bg-antique-800;
+      hover:bg-antique-800
+      disabled:cursor-not-allowed
+      disabled:opacity-50;
 
   }
+
 
 
   .button-secondary {
@@ -109,10 +191,73 @@
       border-antique-600
       px-8
       py-3
+      font-medium
       text-antique-700
       transition
       hover:bg-antique-100;
 
   }
+
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Forms
+  |--------------------------------------------------------------------------
+  */
+
+
+  .form-label {
+
+    @apply
+      mb-2
+      block
+      text-sm
+      font-medium
+      text-antique-700;
+
+  }
+
+
+
+  .form-input {
+
+    @apply
+      w-full
+      rounded-lg
+      border
+      border-antique-200
+      bg-white
+      p-3
+      text-antique-900
+      outline-none
+      transition;
+
+    @apply
+      focus:border-antique-500
+      focus:ring-2
+      focus:ring-antique-200;
+
+  }
+
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Cards
+  |--------------------------------------------------------------------------
+  */
+
+
+  .card-antique {
+
+    @apply
+      rounded-xl
+      bg-white
+      p-8
+      shadow-lg;
+
+  }
+
 
 }

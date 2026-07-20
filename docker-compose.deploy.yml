@@ -1,7 +1,9 @@
 services:
   site:
-    image: ghcr.io/andgelbrissaud/poussieredantan:${VERSION}
+    image: ghcr.io/andgelbrissaud/poussieredantan:v0.1.0
     container_name: poussieredantan
+
     ports:
       - "80:80"
+
     restart: unless-stopped

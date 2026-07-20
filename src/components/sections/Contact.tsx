@@ -1,4 +1,5 @@
 import Container from "../layout/Container";
+import ContactForm from "../forms/ContactForm";
 
 export default function Contact() {
   return (
@@ -93,117 +94,7 @@ export default function Contact() {
 
 
           {/* Formulaire */}
-          <form
-            className="
-              rounded-soft
-              bg-white
-              p-8
-              shadow-antique
-              space-y-5
-            "
-          >
-
-            <div>
-
-              <label
-                className="
-                  block
-                  mb-2
-                  text-sm
-                  text-antique-700
-                "
-              >
-                Nom
-              </label>
-
-
-              <input
-                type="text"
-                className="
-                  w-full
-                  rounded
-                  border
-                  border-antique-200
-                  p-3
-                "
-              />
-
-            </div>
-
-
-
-            <div>
-
-              <label
-                className="
-                  block
-                  mb-2
-                  text-sm
-                  text-antique-700
-                "
-              >
-                Email
-              </label>
-
-
-              <input
-                type="email"
-                className="
-                  w-full
-                  rounded
-                  border
-                  border-antique-200
-                  p-3
-                "
-              />
-
-            </div>
-
-
-
-            <div>
-
-              <label
-                className="
-                  block
-                  mb-2
-                  text-sm
-                  text-antique-700
-                "
-              >
-                Votre projet
-              </label>
-
-
-              <textarea
-                rows={5}
-                className="
-                  w-full
-                  rounded
-                  border
-                  border-antique-200
-                  p-3
-                "
-              />
-
-            </div>
-
-
-
-            <button
-              type="submit"
-              className="
-                button-primary
-                w-full
-              "
-            >
-              Envoyer une demande
-            </button>
-
-
-          </form>
-
-
+            <ContactForm />
         </div>
 
 
