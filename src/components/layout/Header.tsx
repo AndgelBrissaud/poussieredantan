@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Container from "./Container";
 
+import logo from "../../assets/logo-poussiere-antan.svg";
+
 export default function Header() {
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -38,14 +40,32 @@ export default function Header() {
           {/* Logo */}
           <a
             href="/"
-            className="
-              font-display
-              text-3xl
-              text-antique-800
-            "
             onClick={closeMenu}
+            className="
+              flex
+              items-center
+              gap-3
+            "
           >
-            Poussière d'Antan
+            <img
+              src={logo}
+              alt="Poussière d'Antan"
+              className="
+                h-12
+                w-auto
+              "
+            />
+
+            <span
+              className="
+                font-display
+                text-3xl
+                text-antique-800
+                whitespace-nowrap
+              "
+            >
+              Poussière d'Antan
+            </span>
           </a>
 
 

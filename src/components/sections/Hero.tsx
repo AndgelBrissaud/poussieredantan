@@ -1,5 +1,5 @@
 import Container from "../layout/Container";
-import heroImage from "../../assets/images/hero-meuble.jpg";
+import heroImage from "../../assets/images/hero-meuble.webp";
 
 export default function Hero() {
   return (

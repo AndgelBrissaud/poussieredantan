@@ -15,6 +15,10 @@ services:
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - C:/Users/Andge/.docker-watchtower/config.json:/config.json:ro
+
+    environment:
+      - DOCKER_CONFIG=/config
 
     command:
       - "--interval"

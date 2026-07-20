@@ -1,5 +1,5 @@
 import ParallaxImage from "../ParallaxImage";
-import atelierImage from "../../assets/images/hero/atelier.jpg";
+import atelierImage from "../../assets/images/hero/atelier.webp";
 
 
 export default function ParallaxSection() {
