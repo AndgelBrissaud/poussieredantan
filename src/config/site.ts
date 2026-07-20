@@ -8,7 +8,7 @@ export const siteConfig = {
     "Quillebeuf-sur-Seine",
 
   instagram:
-    "@poussieredantan27",
+    "https://www.instagram.com/poussieredantan27/",
 
   services: [
     "Aérogommage",

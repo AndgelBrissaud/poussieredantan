@@ -19,10 +19,11 @@ export default function Contact() {
             grid
             gap-12
             lg:grid-cols-2
+            lg:items-start
           "
         >
 
-          {/* Texte */}
+          {/* Colonne gauche : informations + carte */}
           <div>
 
             <p
@@ -77,7 +78,7 @@ export default function Contact() {
             >
 
               <p className="text-content">
-                Quillebeuf-sur-Seine
+                📍 Quillebeuf-sur-Seine
               </p>
 
 
@@ -85,6 +86,31 @@ export default function Contact() {
                 Instagram : @poussieredantan27
               </p>
 
+            </div>
+
+
+            {/* Carte Google Maps */}
+            <div
+              className="
+                mt-10
+                overflow-hidden
+                rounded-xl
+                shadow-lg
+              "
+            >
+
+              <iframe
+                title="Localisation Poussière d'Antan"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d956.1779759394917!2d0.5245854548397826!3d49.47253316135722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sfr!4v1784569635635!5m2!1sfr!2sfr"
+                width="100%"
+                height="350"
+                style={{
+                  border: 0,
+                }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
 
             </div>
 
@@ -93,8 +119,14 @@ export default function Contact() {
 
 
 
-          {/* Formulaire */}
+          {/* Colonne droite : formulaire */}
+          <div>
+
             <ContactForm />
+
+          </div>
+
+
         </div>
 
 

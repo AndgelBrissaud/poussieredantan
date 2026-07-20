@@ -1,9 +1,22 @@
 services:
-  site:
-    image: ghcr.io/andgelbrissaud/poussieredantan:v0.1.0
-    container_name: poussieredantan
 
+  site:
+    image: ghcr.io/andgelbrissaud/poussieredantan:latest
+    container_name: poussieredantan
     ports:
       - "80:80"
-
     restart: unless-stopped
+
+
+  watchtower:
+    image: nickfedor/watchtower
+    container_name: poussieredantan-watchtower
+    restart: unless-stopped
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    command:
+      - "--interval"
+      - "300"
+      - "poussieredantan"
