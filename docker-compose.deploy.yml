@@ -3,9 +3,13 @@ services:
   site:
     image: ghcr.io/andgelbrissaud/poussieredantan:latest
     container_name: poussieredantan
+    restart: unless-stopped
+
     ports:
       - "80:80"
-    restart: unless-stopped
+
+    networks:
+      - poussieredantan-network
 
 
   watchtower:
@@ -24,3 +28,30 @@ services:
       - "--interval"
       - "300"
       - "poussieredantan"
+
+    networks:
+      - poussieredantan-network
+
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: poussieredantan-cloudflared
+    restart: unless-stopped
+
+    volumes:
+      - ./cloudflared:/etc/cloudflared
+
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - 9e6e3f2d-ed85-4534-9811-2bc3ce59edcf
+
+    networks:
+      - poussieredantan-network
+
+
+networks:
+
+  poussieredantan-network:
+    driver: bridge

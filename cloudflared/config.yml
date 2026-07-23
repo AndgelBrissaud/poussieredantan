@@ -1,0 +1,16 @@
+tunnel: 9e6e3f2d-ed85-4534-9811-2bc3ce59edcf
+
+credentials-file: /etc/cloudflared/9e6e3f2d-ed85-4534-9811-2bc3ce59edcf.json
+
+
+ingress:
+
+  - hostname: poussieredantan.com
+    service: http://site:80
+
+
+  - hostname: www.poussieredantan.com
+    service: http://site:80
+
+
+  - service: http_status:404
