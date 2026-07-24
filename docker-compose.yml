@@ -5,35 +5,32 @@ services:
     container_name: poussieredantan
     restart: unless-stopped
 
-    depends_on:
-      - backend
-
     labels:
       traefik.enable: "true"
 
       traefik.http.routers.poussieredantan.rule: "Host(`poussieredantan.com`) || Host(`www.poussieredantan.com`)"
-
       traefik.http.routers.poussieredantan.entrypoints: "web"
 
       traefik.http.services.poussieredantan.loadbalancer.server.port: "80"
+
+    depends_on:
+      - backend
 
     networks:
       - web
 
 
-
   backend:
-
     image: ghcr.io/andgelbrissaud/poussieredantan-backend:latest
-
     container_name: poussieredantan-backend
-
     restart: unless-stopped
 
+    environment:
+      NODE_ENV: production
+      PORT: 3000
 
-    expose:
-      - "3000"
-
+    volumes:
+      - ./data:/app/data
 
     networks:
       - web
@@ -43,5 +40,4 @@ services:
 networks:
 
   web:
-
     external: true
