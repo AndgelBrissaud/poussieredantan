@@ -1,16 +1,69 @@
 import Database from "better-sqlite3";
 import path from "path";
-import { fileURLToPath } from "url";
+import fs from "fs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-const dbPath = path.join(
-  __dirname,
-  "../../../data/database.sqlite"
+
+/*
+|--------------------------------------------------------------------------
+| Dossier de données
+|--------------------------------------------------------------------------
+|
+| Docker :
+| /opt/docker/poussieredantan/data
+|       ↓
+| /app/data dans le container
+|
+*/
+
+
+const dataDir = path.join(
+  process.cwd(),
+  "data"
 );
 
-const db = new Database(dbPath);
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Création automatique du dossier data
+|--------------------------------------------------------------------------
+*/
+
+
+if (!fs.existsSync(dataDir)) {
+
+  fs.mkdirSync(dataDir, {
+    recursive: true
+  });
+
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Base SQLite
+|--------------------------------------------------------------------------
+*/
+
+
+const dbPath = path.join(
+  dataDir,
+  "database.sqlite"
+);
+
+
+
+const db = new Database(
+  dbPath
+);
+
+
 
 
 
@@ -18,15 +71,29 @@ const db = new Database(dbPath);
 // Optimisations SQLite
 // -----------------------------------------------------------------------------
 
-db.pragma("journal_mode = WAL");
-db.pragma("foreign_keys = ON");
-db.pragma("synchronous = NORMAL");
+
+db.pragma(
+  "journal_mode = WAL"
+);
+
+
+db.pragma(
+  "foreign_keys = ON"
+);
+
+
+db.pragma(
+  "synchronous = NORMAL"
+);
+
+
 
 
 
 // -----------------------------------------------------------------------------
 // TABLE DES RÉALISATIONS
 // -----------------------------------------------------------------------------
+
 
 db.prepare(`
 CREATE TABLE IF NOT EXISTS realisations (
@@ -48,10 +115,13 @@ CREATE TABLE IF NOT EXISTS realisations (
 
 
 
+
+
 // -----------------------------------------------------------------------------
 // TABLE ADMINISTRATEUR
 // Un seul administrateur est nécessaire.
 // -----------------------------------------------------------------------------
+
 
 db.prepare(`
 CREATE TABLE IF NOT EXISTS admins (
@@ -67,10 +137,13 @@ CREATE TABLE IF NOT EXISTS admins (
 
 
 
+
+
 // -----------------------------------------------------------------------------
 // TABLE DES SESSIONS
 // Une ligne = une connexion active.
 // -----------------------------------------------------------------------------
+
 
 db.prepare(`
 CREATE TABLE IF NOT EXISTS sessions (
@@ -88,19 +161,26 @@ CREATE TABLE IF NOT EXISTS sessions (
 
 
 
+
+
 // -----------------------------------------------------------------------------
 // INDEX
 // -----------------------------------------------------------------------------
+
 
 db.prepare(`
 CREATE INDEX IF NOT EXISTS idx_sessions_token
 ON sessions(token)
 `).run();
 
+
+
 db.prepare(`
 CREATE INDEX IF NOT EXISTS idx_sessions_expiration
 ON sessions(expires_at)
 `).run();
+
+
 
 
 
