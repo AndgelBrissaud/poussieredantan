@@ -8,6 +8,11 @@ services:
     depends_on:
       - backend
 
+    volumes:
+      # Accès aux images uploadées pour nginx
+      - ./data/upload:/app/data/upload:ro
+
+
     labels:
       traefik.enable: "true"
 
@@ -41,7 +46,8 @@ services:
 
     volumes:
 
-      - /opt/docker/poussieredantan/data:/app/data
+      # Stockage persistant des uploads
+      - ./data:/app/data
 
 
     networks:

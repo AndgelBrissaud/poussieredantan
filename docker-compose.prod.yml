@@ -8,6 +8,10 @@ services:
     depends_on:
       - backend
 
+    volumes:
+      # Accès aux images uploadées pour nginx
+      - /opt/docker/poussieredantan/data/upload:/app/data/upload:ro
+
     labels:
       traefik.enable: "true"
 
@@ -24,6 +28,7 @@ services:
 
 
   backend:
+
     image: ghcr.io/andgelbrissaud/poussieredantan-backend:latest
 
     container_name: poussieredantan-backend
@@ -32,7 +37,9 @@ services:
 
 
     environment:
+
       NODE_ENV: production
+
       PORT: 3000
 
 
@@ -42,6 +49,7 @@ services:
 
 
     networks:
+
       - web
 
 
