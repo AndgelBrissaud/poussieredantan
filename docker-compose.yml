@@ -1,14 +1,47 @@
 services:
-  app:
-    container_name: poussieredantan-dev
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+
+  site:
+    image: ghcr.io/andgelbrissaud/poussieredantan:latest
+    container_name: poussieredantan
     restart: unless-stopped
+
+    depends_on:
+      - backend
+
+    labels:
+      traefik.enable: "true"
+
+      traefik.http.routers.poussieredantan.rule: "Host(`poussieredantan.com`) || Host(`www.poussieredantan.com`)"
+
+      traefik.http.routers.poussieredantan.entrypoints: "web"
+
+      traefik.http.services.poussieredantan.loadbalancer.server.port: "80"
+
+    networks:
+      - web
+
+
+
+  backend:
+
+    image: ghcr.io/andgelbrissaud/poussieredantan-backend:latest
+
+    container_name: poussieredantan-backend
+
+    restart: unless-stopped
+
+
+    expose:
+      - "3000"
+
+
+    networks:
+      - web
+
+
+
+networks:
+
+  web:
+
+    external: true
