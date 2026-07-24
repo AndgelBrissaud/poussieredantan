@@ -17,12 +17,7 @@ dotenv.config();
 
 
 
-
-
 const app = express();
-
-
-
 
 
 
@@ -30,7 +25,7 @@ const app = express();
 
 /*
 |--------------------------------------------------------------------------
-| Middlewares généraux
+| Middlewares
 |--------------------------------------------------------------------------
 */
 
@@ -39,10 +34,9 @@ app.use(
 
   cors({
 
-    origin:
-      "http://localhost:5173",
+    origin: true,
 
-    credentials:true
+    credentials: true
 
   })
 
@@ -92,7 +86,7 @@ const __dirname =
 
 /*
 |--------------------------------------------------------------------------
-| Images uploadées
+| Uploads images
 |--------------------------------------------------------------------------
 */
 
@@ -131,7 +125,7 @@ app.use(
 
 
 /*
-  Authentification
+ Authentification
 */
 
 app.use(
@@ -147,7 +141,7 @@ app.use(
 
 
 /*
-  Administration protégée
+ Administration protégée
 */
 
 app.use(
@@ -163,7 +157,7 @@ app.use(
 
 
 /*
-  Réalisations publiques
+ Réalisations publiques
 */
 
 app.use(
@@ -184,24 +178,23 @@ app.use(
 
 /*
 |--------------------------------------------------------------------------
-| Gestion erreurs globale
+| Test API
 |--------------------------------------------------------------------------
 */
 
 
-app.use(
+app.get(
 
-  (err, req, res, next)=>{
+  "/api",
 
-
-    console.error(err);
-
+  (req,res)=>{
 
 
-    res.status(500).json({
+    res.json({
 
-      error:
-        "Erreur interne du serveur"
+      status:"ok",
+
+      message:"API Poussière d'Antan active"
 
     });
 
@@ -220,7 +213,47 @@ app.use(
 
 /*
 |--------------------------------------------------------------------------
-| Démarrage serveur
+| Gestion erreurs
+|--------------------------------------------------------------------------
+*/
+
+
+app.use(
+
+  (err,req,res,next)=>{
+
+
+    console.error(
+      "Erreur serveur :",
+      err
+    );
+
+
+
+    res.status(500).json({
+
+      error:
+      "Erreur interne serveur"
+
+    });
+
+
+
+  }
+
+);
+
+
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Serveur
 |--------------------------------------------------------------------------
 */
 
@@ -238,7 +271,9 @@ app.listen(
 
 
     console.log(
+
       `Backend lancé sur le port ${PORT}`
+
     );
 
 
