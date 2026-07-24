@@ -34,7 +34,13 @@ app.use(
 
   cors({
 
-    origin: true,
+    origin: [
+
+      "https://poussieredantan.com",
+
+      "https://www.poussieredantan.com"
+
+    ],
 
     credentials: true
 
@@ -44,8 +50,22 @@ app.use(
 
 
 
+
+
 app.use(
   express.json()
+);
+
+
+
+app.use(
+
+  express.urlencoded({
+
+    extended:true
+
+  })
+
 );
 
 
@@ -125,8 +145,11 @@ app.use(
 
 
 /*
- Authentification
+|--------------------------------------------------------------------------
+| Authentification
+|--------------------------------------------------------------------------
 */
+
 
 app.use(
 
@@ -140,9 +163,14 @@ app.use(
 
 
 
+
+
 /*
- Administration protégée
+|--------------------------------------------------------------------------
+| Administration
+|--------------------------------------------------------------------------
 */
+
 
 app.use(
 
@@ -156,9 +184,14 @@ app.use(
 
 
 
+
+
 /*
- Réalisations publiques
+|--------------------------------------------------------------------------
+| Réalisations publiques
+|--------------------------------------------------------------------------
 */
+
 
 app.use(
 
@@ -178,7 +211,7 @@ app.use(
 
 /*
 |--------------------------------------------------------------------------
-| Test API
+| Health check
 |--------------------------------------------------------------------------
 */
 
@@ -224,8 +257,11 @@ app.use(
 
 
     console.error(
+
       "Erreur serveur :",
+
       err
+
     );
 
 
@@ -233,6 +269,7 @@ app.use(
     res.status(500).json({
 
       error:
+
       "Erreur interne serveur"
 
     });
@@ -259,6 +296,7 @@ app.use(
 
 
 const PORT =
+
   process.env.PORT || 3000;
 
 
