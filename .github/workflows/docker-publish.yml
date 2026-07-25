@@ -75,7 +75,13 @@ jobs:
           push: true
 
 
+          no-cache: true
+
+
+
           build-args: |
+
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
 
             VITE_EMAIL_SERVICE_ID=${{ secrets.VITE_EMAIL_SERVICE_ID }}
 
@@ -84,8 +90,6 @@ jobs:
             VITE_EMAIL_PUBLIC_KEY=${{ secrets.VITE_EMAIL_PUBLIC_KEY }}
 
             VITE_TURNSTILE_SITE_KEY=${{ secrets.VITE_TURNSTILE_SITE_KEY }}
-
-            VITE_API_URL=${{ secrets.VITE_API_URL }}
 
 
 
@@ -165,6 +169,9 @@ jobs:
 
 
           push: true
+
+
+          no-cache: true
 
 
           tags: |
