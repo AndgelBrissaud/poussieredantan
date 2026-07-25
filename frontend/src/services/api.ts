@@ -1,5 +1,5 @@
 export const API_BASE_URL =
-  "";
+  import.meta.env.VITE_API_URL || "";
 
 
 
@@ -21,6 +21,21 @@ export type Realisation = {
 
 };
 
+
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Réalisations administration
+|--------------------------------------------------------------------------
+*/
+
+
 export async function getAdminRealisations(){
 
   const response =
@@ -37,6 +52,7 @@ export async function getAdminRealisations(){
     );
 
 
+
   if(!response.ok){
 
     throw new Error(
@@ -46,9 +62,13 @@ export async function getAdminRealisations(){
   }
 
 
+
   return response.json();
 
 }
+
+
+
 
 
 
@@ -129,7 +149,9 @@ export async function checkAuth(){
 
 
     return {
+
       authenticated:false
+
     };
 
 
@@ -151,7 +173,9 @@ export async function checkAuth(){
 
 
 export async function loginAdmin(
+
   password:string
+
 ){
 
 
@@ -224,6 +248,13 @@ export async function loginAdmin(
 
 
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Déconnexion
+|--------------------------------------------------------------------------
+*/
 
 
 export async function logoutAdmin(){

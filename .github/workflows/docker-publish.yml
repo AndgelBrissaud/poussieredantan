@@ -57,17 +57,36 @@ jobs:
 
 
 
+
+
       - name: Build and push frontend
 
         uses: docker/build-push-action@v6
 
         with:
 
+
           context: .
+
 
           file: ./Dockerfile
 
+
           push: true
+
+
+          build-args: |
+
+            VITE_EMAIL_SERVICE_ID=${{ secrets.VITE_EMAIL_SERVICE_ID }}
+
+            VITE_EMAIL_TEMPLATE_ID=${{ secrets.VITE_EMAIL_TEMPLATE_ID }}
+
+            VITE_EMAIL_PUBLIC_KEY=${{ secrets.VITE_EMAIL_PUBLIC_KEY }}
+
+            VITE_TURNSTILE_SITE_KEY=${{ secrets.VITE_TURNSTILE_SITE_KEY }}
+
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
+
 
 
           tags: |
@@ -75,6 +94,9 @@ jobs:
             ghcr.io/andgelbrissaud/poussieredantan:latest
 
             ghcr.io/andgelbrissaud/poussieredantan:${{ github.ref_name }}
+
+
+
 
 
 
@@ -112,9 +134,12 @@ jobs:
 
         with:
 
+
           registry: ghcr.io
 
+
           username: ${{ github.actor }}
+
 
           password: ${{ secrets.GITHUB_TOKEN }}
 
