@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 export type LoadingContextType = {
   isLoading: boolean;
@@ -6,5 +6,14 @@ export type LoadingContextType = {
   hide: () => void;
 };
 
-export const LoadingContext =
-  createContext<LoadingContextType | null>(null);
+export const LoadingContext = createContext<LoadingContextType | null>(null);
+
+export function useLoading() {
+  const ctx = useContext(LoadingContext);
+
+  if (!ctx) {
+    throw new Error("useLoading must be used within LoadingProvider");
+  }
+
+  return ctx;
+}

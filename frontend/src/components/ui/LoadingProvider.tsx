@@ -1,18 +1,12 @@
-import React, {
-  useState,
-  useCallback,
-} from "react";
-
+import React, { useState, useCallback } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { LoadingContext } from "./LoadingContext";
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export default function LoadingProvider({
+export function LoadingProvider({
   children,
-}: Props) {
+}: {
+  children: React.ReactNode;
+}) {
   const [count, setCount] = useState(0);
 
   const show = useCallback(() => {
@@ -23,19 +17,16 @@ export default function LoadingProvider({
     setCount((c) => Math.max(0, c - 1));
   }, []);
 
-  const value = {
-    isLoading: count > 0,
-    show,
-    hide,
-  };
-
   return (
-    <LoadingContext.Provider value={value}>
+    <LoadingContext.Provider
+      value={{
+        isLoading: count > 0,
+        show,
+        hide,
+      }}
+    >
       {children}
-
-      <LoadingSpinner
-        visible={value.isLoading}
-      />
+      <LoadingSpinner visible={count > 0} />
     </LoadingContext.Provider>
   );
 }
