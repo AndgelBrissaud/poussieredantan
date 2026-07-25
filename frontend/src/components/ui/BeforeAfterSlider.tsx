@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "../../services/api";
+import { useLoading } from "./LoadingProvider";
 
 
 
@@ -25,6 +26,29 @@ export default function BeforeAfterSlider({
 
   const [position,setPosition] =
     useState(50);
+
+  const [avantLoaded, setAvantLoaded] = useState(false);
+  const [apresLoaded, setApresLoaded] = useState(false);
+
+  const { show, hide } = useLoading();
+
+  const hideCalled = useRef(false);
+
+  useEffect(() => {
+    show();
+    return () => {
+      if (!hideCalled.current) hide();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (avantLoaded && apresLoaded && !hideCalled.current) {
+      hideCalled.current = true;
+      hide();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [avantLoaded, apresLoaded]);
 
 
 
@@ -54,19 +78,11 @@ export default function BeforeAfterSlider({
       {/* IMAGE APRÈS */}
 
       <img
-
         src={`${API_BASE_URL}${apres}`}
-
         alt={`${title} après`}
-
-        className="
-          absolute
-          inset-0
-          h-full
-          w-full
-          object-cover
-        "
-
+        onLoad={() => setApresLoaded(true)}
+        onError={() => setApresLoaded(true)}
+        className="absolute inset-0 h-full w-full object-cover"
       />
 
 
@@ -131,19 +147,11 @@ export default function BeforeAfterSlider({
 
 
         <img
-
           src={`${API_BASE_URL}${avant}`}
-
           alt={`${title} avant`}
-
-          className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
-          "
-
+          onLoad={() => setAvantLoaded(true)}
+          onError={() => setAvantLoaded(true)}
+          className="absolute inset-0 h-full w-full object-cover"
         />
 
 
