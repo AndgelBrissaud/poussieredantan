@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { loginAdmin } from "../../services/api";
-import { useLoading } from "../ui/LoadingProvider";
+import { useLoading } from "../ui/LoadingContext";
 import Toast from "../ui/Toast";
 
 export default function Login({ onLogin }: { onLogin: () => void }) {

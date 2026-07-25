@@ -1,15 +1,18 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
-import LoadingSpinner from "./LoadingSpinner";
+import React, {
+  useState,
+  useCallback,
+} from "react";
 
-type LoadingContextType = {
-  isLoading: boolean;
-  show: () => void;
-  hide: () => void;
+import LoadingSpinner from "./LoadingSpinner";
+import { LoadingContext } from "./LoadingContext";
+
+type Props = {
+  children: React.ReactNode;
 };
 
-const LoadingContext = createContext<LoadingContextType | null>(null);
-
-export function LoadingProvider({ children }: { children: React.ReactNode }) {
+export default function LoadingProvider({
+  children,
+}: Props) {
   const [count, setCount] = useState(0);
 
   const show = useCallback(() => {
@@ -29,15 +32,10 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   return (
     <LoadingContext.Provider value={value}>
       {children}
-      <LoadingSpinner visible={value.isLoading} />
+
+      <LoadingSpinner
+        visible={value.isLoading}
+      />
     </LoadingContext.Provider>
   );
 }
-
-export function useLoading() {
-  const ctx = useContext(LoadingContext);
-  if (!ctx) throw new Error("useLoading must be used within LoadingProvider");
-  return ctx;
-}
-
-export default LoadingProvider;

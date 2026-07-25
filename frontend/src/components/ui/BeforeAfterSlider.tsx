@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "../../services/api";
-import { useLoading } from "./LoadingProvider";
+import { useLoading } from "./LoadingContext";
 
 
 
