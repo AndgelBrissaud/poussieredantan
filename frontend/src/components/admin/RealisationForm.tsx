@@ -3,7 +3,11 @@ import { API_BASE_URL } from "../../services/api";
 import Toast from "../ui/Toast";
 import { useLoading } from "../ui/LoadingContext";
 
-export default function RealisationForm() {
+type Props = {
+  onCreated?: () => void;
+};
+
+export default function RealisationForm({ onCreated }: Props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -87,6 +91,13 @@ export default function RealisationForm() {
       setApresPreview(null);
 
       setToast("Réalisation enregistrée avec succès");
+
+      // notify parent (e.g. Admin) that a new item was created
+      try {
+        onCreated?.();
+      } catch {
+        console.warn("onCreated callback failed");
+      }
     } catch (error) {
       console.error(error);
       setToast("Une erreur est survenue lors de l'enregistrement");

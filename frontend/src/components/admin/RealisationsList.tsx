@@ -12,10 +12,11 @@ import BeforeAfterSlider from "../ui/BeforeAfterSlider";
 import EditRealisation from "./EditRealisation";
 
 
+type Props = {
+  refreshKey?: number;
+};
 
-
-
-export default function RealisationsList() {
+export default function RealisationsList({ refreshKey = 0, }: Props) {
 
 
 
@@ -135,26 +136,14 @@ export default function RealisationsList() {
 
 
 
-  useEffect(()=>{
-
-
-    async function init(){
-
-
+  useEffect(() => {
+    async function init() {
       await loadRealisations();
-
-
       setLoading(false);
-
-
     }
 
-
-
     init();
-
-
-  },[]);
+  }, [refreshKey]);
 
 
 
