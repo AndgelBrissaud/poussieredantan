@@ -8,63 +8,40 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 
-
-# =========================
-# Variables Vite production
-# =========================
-
-ARG VITE_API_URL
-
-ARG VITE_EMAIL_SERVICE_ID
-
-ARG VITE_EMAIL_TEMPLATE_ID
-
-ARG VITE_EMAIL_PUBLIC_KEY
-
-ARG VITE_TURNSTILE_SITE_KEY
-
-
-
-ENV VITE_API_URL=$VITE_API_URL
-
-ENV VITE_EMAIL_SERVICE_ID=$VITE_EMAIL_SERVICE_ID
-
-ENV VITE_EMAIL_TEMPLATE_ID=$VITE_EMAIL_TEMPLATE_ID
-
-ENV VITE_EMAIL_PUBLIC_KEY=$VITE_EMAIL_PUBLIC_KEY
-
-ENV VITE_TURNSTILE_SITE_KEY=$VITE_TURNSTILE_SITE_KEY
-
-
-
-
-
-# =========================
-# Installation dépendances
-# =========================
-
 COPY frontend/package*.json ./
 
 
 RUN npm ci
 
 
-
-
-
-# =========================
-# Code frontend
-# =========================
-
 COPY frontend .
 
 
 
+# =========================
+# Variables Vite production
+# =========================
+
+ARG VITE_EMAIL_SERVICE_ID
+ARG VITE_EMAIL_TEMPLATE_ID
+ARG VITE_EMAIL_PUBLIC_KEY
+ARG VITE_TURNSTILE_SITE_KEY
+ARG VITE_API_URL
 
 
-# =========================
-# Build production
-# =========================
+
+ENV VITE_EMAIL_SERVICE_ID=${VITE_EMAIL_SERVICE_ID}
+ENV VITE_EMAIL_TEMPLATE_ID=${VITE_EMAIL_TEMPLATE_ID}
+ENV VITE_EMAIL_PUBLIC_KEY=${VITE_EMAIL_PUBLIC_KEY}
+ENV VITE_TURNSTILE_SITE_KEY=${VITE_TURNSTILE_SITE_KEY}
+ENV VITE_API_URL=${VITE_API_URL}
+
+
+
+# Vérification pendant le build
+RUN echo "TURNSTILE KEY:"
+RUN echo ${VITE_TURNSTILE_SITE_KEY}
+
 
 RUN npm run build
 
@@ -79,17 +56,13 @@ RUN npm run build
 FROM nginx:alpine
 
 
-
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 
-
 EXPOSE 80
 
 
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx","-g","daemon off;"]
